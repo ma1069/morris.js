@@ -2034,8 +2034,8 @@ Licensed under the BSD-2-Clause License.
         last = next;
         idx += 1;
       }
-      this.text1 = this.drawEmptyDonutLabel(cx, cy - 10, this.options.labelColor, 15, 800);
-      this.text2 = this.drawEmptyDonutLabel(cx, cy + 10, this.options.labelColor, 14);
+      this.text1 = this.drawEmptyDonutLabel(cx, cy - 10, this.options.labelColor, 15, 800, "lbl-primary");
+      this.text2 = this.drawEmptyDonutLabel(cx, cy + 10, this.options.labelColor, 14, 400, "lbl-sec");
       max_value = Math.max.apply(Math, this.values);
       idx = 0;
       _ref2 = this.values;
@@ -2111,9 +2111,10 @@ Licensed under the BSD-2-Clause License.
       });
     };
 
-    Donut.prototype.drawEmptyDonutLabel = function(xPos, yPos, color, fontSize, fontWeight) {
+    Donut.prototype.drawEmptyDonutLabel = function(xPos, yPos, color, fontSize, fontWeight, name) {
       var text;
       text = this.raphael.text(xPos, yPos, '').attr('font-size', fontSize).attr('fill', color);
+      text.node.setAttribute('class', name);
       if (fontWeight != null) {
         text.attr('font-weight', fontWeight);
       }

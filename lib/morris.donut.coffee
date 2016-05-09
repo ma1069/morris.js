@@ -85,8 +85,8 @@ class Morris.Donut extends Morris.EventEmitter
       last = next
       idx += 1
 
-    @text1 = @drawEmptyDonutLabel(cx, cy - 10, @options.labelColor, 15, 800)
-    @text2 = @drawEmptyDonutLabel(cx, cy + 10, @options.labelColor, 14)
+    @text1 = @drawEmptyDonutLabel(cx, cy - 10, @options.labelColor, 15, 800, "lbl-primary")
+    @text2 = @drawEmptyDonutLabel(cx, cy + 10, @options.labelColor, 14, 400,"lbl-sec")
 
     max_value = Math.max @values...
     idx = 0
@@ -130,10 +130,11 @@ class Morris.Donut extends Morris.EventEmitter
     text2scale = Math.min(maxWidth / text2bbox.width, maxHeightBottom / text2bbox.height)
     @text2.attr(transform: "S#{text2scale},#{text2scale},#{text2bbox.x + text2bbox.width / 2},#{text2bbox.y}")
 
-  drawEmptyDonutLabel: (xPos, yPos, color, fontSize, fontWeight) ->
+  drawEmptyDonutLabel: (xPos, yPos, color, fontSize, fontWeight, name) ->
     text = @raphael.text(xPos, yPos, '')
       .attr('font-size', fontSize)
       .attr('fill', color)
+    text.node.setAttribute('class', name)
     text.attr('font-weight', fontWeight) if fontWeight?
     return text
 
