@@ -111,17 +111,17 @@ class Morris.Donut extends Morris.EventEmitter
     segment = @segments[idx]
     segment.select()
     row = @data[idx]
-    @setLabels(row.label, @options.formatter(row.value, row))
+    @setLabels(@options.formatter(row.value, row), row.label, idx)
 
 
 
   # @private
-  setLabels: (label1, label2) ->
+  setLabels: (label1, label2, idx) ->
     inner = (Math.min(@el.width() / 2, @el.height() / 2) - 10) * 2 / 3
     maxWidth = 1.8 * inner
     maxHeightTop = inner / 2
     maxHeightBottom = inner / 3
-    @text1.attr(text: label1, transform: '')
+    @text1.attr(text: label1, transform: '', fill: @options.colors[idx])
     text1bbox = @text1.getBBox()
     text1scale = Math.min(maxWidth / text1bbox.width, maxHeightTop / text1bbox.height)
     @text1.attr(transform: "S#{text1scale},#{text1scale},#{text1bbox.x + text1bbox.width / 2},#{text1bbox.y + text1bbox.height}")
@@ -211,3 +211,4 @@ class Morris.DonutSegment extends Morris.EventEmitter
       @seg.animate(path: @path, 150, '<>')
       @arc.animate(opacity: 0, 150, '<>')
       @selected = false
+
